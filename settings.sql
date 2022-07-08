@@ -1,0 +1,3 @@
+CREATE DATABASE fooder;
+CREATE USER fooderuser WITH PASSWORD 'fooder';
+GRANT ALL PRIVILEGES ON DATABASE fooder TO fooderuser ;
