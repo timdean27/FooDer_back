@@ -4,7 +4,8 @@ from rest_framework.routers import DefaultRouter
 
 urlpatterns = [
 
-    path('Gfoods/', views.GfoodList.as_view(), name='gfood_list'),
-    path('Gfoods/<int:pk>', views.GfoodDetail.as_view(), name='gfood_detail'),
-
+    path('gfoods/', views.GfoodList.as_view(), name='gfood_list'),
+    path('gfoods/<int:pk>', views.GfoodDetail.as_view(), name='gfood_detail'),
+    
+    path('gfoods_protected/', views.GfoodListProtected.as_view(), name='gfood_detail'),
 ]
