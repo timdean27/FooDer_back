@@ -8,4 +8,4 @@ class GfoodSerializer(serializers.HyperlinkedModelSerializer):
     )       
     class Meta:
         model = Gfood
-        fields = ('id','gfood_url', 'name', 'image_url', 'created_at')
+        fields = ('id','gfood_url', 'name', 'image_url', 'user_string', 'created_at')

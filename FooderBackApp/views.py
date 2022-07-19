@@ -9,7 +9,7 @@ from .models import Gfood
 # Create your views here.
 
 
-class GfoodList(generics.ListCreateAPIView):
+class GfoodList(generics.ListAPIView):
     queryset = Gfood.objects.all()
     serializer_class = GfoodSerializer
 
@@ -17,14 +17,35 @@ class GfoodDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Gfood.objects.all()
     serializer_class = GfoodSerializer
 
-class GfoodListProtected(generics.ListCreateAPIView):
+
+def mock_signup(request):
+    return JsonResponse({'loggedIn':True, 'username': 'mock_user'})
+
+
+
+class GfoodListProtected(generics.ListAPIView):
     queryset = Gfood.objects.all()
     serializer_class = GfoodSerializer
     
     permission_classes = [permissions.IsAuthenticated]
 
-class GfoodUpdateProtected(generics.UpdateAPIView):
+class GfoodCreateProtected(generics.CreateAPIView):
     queryset = Gfood.objects.all()
     serializer_class = GfoodSerializer
     
     permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request, *args, **kwargs):
+        request.data['user_string'] = request.user.username
+        return super().post(request, *args, **kwargs)
+class GfoodUpdateProtected(generics.UpdateAPIView):
+    queryset = Gfood.objects.all()
+    serializer_class = GfoodSerializer
+    
+    permission_classes = [permissions.IsAdminUser]
+
+class GfoodDeleteProtected(generics.DestroyAPIView):
+    queryset = Gfood.objects.all()
+    serializer_class = GfoodSerializer
+    
+    permission_classes = [permissions.IsAdminUser]
