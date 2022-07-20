@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 
-from rest_framework import generics , permissions
+from rest_framework import generics , permissions ,viewsets
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .serializers import GfoodSerializer
+from .serializers import GfoodSerializer , UserSerializer
 
 from .models import Gfood
+from django.contrib.auth.models import User
 # Create your views here.
 
 
@@ -33,7 +34,7 @@ class GfoodCreateProtected(generics.CreateAPIView):
     queryset = Gfood.objects.all()
     serializer_class = GfoodSerializer
     
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAdminUser]
 
     def post(self, request, *args, **kwargs):
         request.data['user_string'] = request.user.username
@@ -49,3 +50,7 @@ class GfoodDeleteProtected(generics.DestroyAPIView):
     serializer_class = GfoodSerializer
     
     permission_classes = [permissions.IsAdminUser]
+
+class UserViewSet(viewsets.ModelViewSet):
+    serializer_class = UserSerializer
+    queryset = User.objects.all()

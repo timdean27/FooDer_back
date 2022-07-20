@@ -1,6 +1,11 @@
-from django.urls import path
+from django.urls import path , include
 from . import views
 from rest_framework.routers import DefaultRouter
+from .views import UserViewSet
+
+router = DefaultRouter()
+router.register('users', UserViewSet)
+
 
 urlpatterns = [
 
@@ -8,6 +13,8 @@ urlpatterns = [
     path('gfoods/<int:pk>', views.GfoodDetail.as_view(), name='gfood_detail'),
     
     path('mock_signup', views.mock_signup),
+   
+    path('api/', include(router.urls)),
 
 
     path('gfoods_view_protected/', views.GfoodListProtected.as_view(), name='gfood_detail'),
