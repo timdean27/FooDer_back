@@ -13,6 +13,7 @@ django-rest-knox = "*"
 whitenoise = "*"
 dj-database-url = "*"
 gunicorn = "*"
+django-extensions = "*"
 
 [dev-packages]
 
