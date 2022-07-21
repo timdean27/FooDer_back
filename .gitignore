@@ -30,5 +30,6 @@ media
 #         'PASSWORD': 'fooder'
 #     }
 # }
+#
 
 # SECRET_KEY = 'django-insecure-u)5%$@0vp$3vc+ubt9)+44$-e4@dc$_7g-wkuvx8cg#&hpap5u'
